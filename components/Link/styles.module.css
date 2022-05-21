@@ -1,9 +1,8 @@
 .a {
-  /* TODO: set link defaults */
-  --active-color: #fff;
+  --active-color: #var(--color-accent);
   --active-background-color: none;
   --background: none;
-  --text-color: var(--color-primary);
+  --text-color: #fff;
   --hover-color: var(--color-accent);
   --hover-background-color: none;
   background: var(--background);

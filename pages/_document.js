@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        {/* TODO: select google font */}
         <link
           rel='preconnect'
           href='https://fonts.googleapis.com'
@@ -12,9 +11,10 @@ export default function Document() {
         <link
           rel='preconnect'
           href='https://fonts.gstatic.com'
+          crossOrigin='true'
         />
         <link
-          href='https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,500&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap'
           rel='stylesheet'
         />
       </Head>

@@ -10,7 +10,6 @@ export default function Logo() {
         <a>
           <h1>
             <b>{meta.TITLE}</b>
-            {/* TODO: optional <small>{meta.TAG}</small> */}
           </h1>
         </a>
       </Link>

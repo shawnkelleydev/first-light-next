@@ -1,6 +1,5 @@
 .footer {
   background: var(--color-primary);
-  /* TODO: check color against bg */
   color: #fff;
   display: flex;
   padding: 8px;

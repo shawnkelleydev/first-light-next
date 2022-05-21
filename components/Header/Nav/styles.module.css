@@ -32,5 +32,6 @@
 @media (min-width: 1024px) {
   .nav a:hover {
     background: var(--color-accent);
+    color: #111;
   }
 }

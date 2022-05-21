@@ -4,12 +4,12 @@
 }
 
 .logo h1 {
+  background: var(--color-primary);
   display: flex;
-  flex-direction: column;
-  padding: 8px;
+  font-weight: 300;
+  padding: 8px 24px;
 }
 
-.logo small {
-  font-size: 1rem;
-  font-weight: 300;
+.logo span:last-child {
+  color: var(--color-accent);
 }

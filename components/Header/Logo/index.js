@@ -4,12 +4,16 @@ import { meta } from 'constants/data'
 import styles from './styles.module.css'
 
 export default function Logo() {
+  const text = meta.TITLE.split(' ')
+
   return (
     <div className={styles.logo}>
       <Link href='/'>
         <a>
           <h1>
-            <b>{meta.TITLE}</b>
+            {text.map((word, index) => (
+              <span key={index}>{word}</span>
+            ))}
           </h1>
         </a>
       </Link>

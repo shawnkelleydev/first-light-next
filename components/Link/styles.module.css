@@ -8,7 +8,7 @@
   background: var(--background);
   color: var(--text-color);
   position: relative;
-  transition: 0.1s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .active {

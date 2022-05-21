@@ -1,0 +1,13 @@
+.footer {
+  background: var(--color-primary);
+  /* TODO: check color against bg */
+  color: #fff;
+  display: flex;
+  padding: 8px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin-bottom: 45px;
+  }
+}

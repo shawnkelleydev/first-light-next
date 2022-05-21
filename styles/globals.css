@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+  /* TODO: Select Font */
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* TODO: Set Theme Colors */
+  --color-primary: #111;
+  --color-secondary: #eee;
+  --color-accent: rgb(144, 103, 26);
+}
+
+a {
+  text-decoration: none;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}

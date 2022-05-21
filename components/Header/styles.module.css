@@ -1,0 +1,11 @@
+.header {
+  background: var(--color-primary);
+  display: flex;
+}
+
+.header h1,
+.header small,
+.header a {
+  /* TODO: change header text color */
+  color: #fff;
+}

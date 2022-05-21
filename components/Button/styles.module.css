@@ -1,0 +1,59 @@
+.button {
+  /* TODO: set button defaults */
+  /* REMINDER: text content must be managed with additional markup */
+  --border-radius: 8px;
+  --color-background: var(--color-primary);
+  --color-highlight-background: var(--color-accent);
+  --color-highlight-text: #111;
+  --transition-text: 0.2s ease-out;
+  --transition-transform: 0.4s cubic-bezier(0.54, -0.33, 0.39, 1.62);
+  --transition-background: 0.2s ease-out;
+  border: none;
+  border-radius: var(--border-radius);
+  color: #fff;
+  display: flex;
+  fill: #fff;
+  font-size: 1.2em;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.button::before {
+  background: var(--color-background);
+  content: '';
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.button::after {
+  background: var(--color-highlight-background);
+  content: '';
+  height: 0;
+  position: absolute;
+  transition: var(--transition-background);
+  width: 100%;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+}
+
+.button:hover,
+.button[class*='active'] {
+  color: var(--color-highlight-text);
+  fill: var(--color-highlight-text);
+}
+
+.button:hover::after,
+.button[class*='active']::after {
+  height: 100%;
+}
+
+.button svg,
+.button strong {
+  transition: var(--transition-text);
+}

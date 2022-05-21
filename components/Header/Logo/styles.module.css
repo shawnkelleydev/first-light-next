@@ -7,7 +7,7 @@
   background: var(--color-primary);
   display: flex;
   font-weight: 300;
-  padding: 8px 24px;
+  padding: 8px 12px;
 }
 
 .logo span:last-child {

@@ -1,0 +1,7 @@
+.daily-verse {
+  display: flex;
+  flex: 1 250px;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+}

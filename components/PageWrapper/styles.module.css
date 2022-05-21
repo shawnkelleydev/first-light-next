@@ -6,8 +6,3 @@
   min-height: 100vh;
   width: 100vw;
 }
-
-.page-wrapper main {
-  flex: 1;
-  margin: 8px;
-}

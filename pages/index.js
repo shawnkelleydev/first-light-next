@@ -1,3 +1,4 @@
+import DailyVerse from 'components/DailyVerse'
 import EarthPic from 'components/EarthPic'
 import PageWrapper from 'components/PageWrapper'
 
@@ -8,6 +9,7 @@ export default function Home() {
     <PageWrapper>
       <div className={styles.home}>
         <EarthPic />
+        <DailyVerse />
       </div>
     </PageWrapper>
   )

@@ -42,7 +42,7 @@ export default function Home() {
     })()
   }, [router])
 
-  if (loading || !earthPic)
+  if (loading)
     return (
       <PageWrapper>
         <Loader />

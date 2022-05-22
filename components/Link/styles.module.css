@@ -2,12 +2,14 @@
   --active-color: #var(--color-accent);
   --active-background-color: none;
   --background: none;
-  --text-color: #fff;
-  --hover-color: var(--color-accent);
   --hover-background-color: none;
+  --hover-color: var(--color-accent);
+  --padding: 0;
+  --text-color: #fff;
   background: var(--background);
   color: var(--text-color);
   position: relative;
+  padding: var(--padding);
   transition: 0.2s ease-out;
 }
 

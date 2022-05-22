@@ -5,3 +5,13 @@
   gap: 24px;
   text-align: center;
 }
+
+.daily-verse h2,
+.daily-verse h3,
+.daily-verse p:last-child {
+  display: none;
+}
+
+.daily-verse b {
+  font-weight: 300;
+}

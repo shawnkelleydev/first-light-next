@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const getEarchPic = async () => {
+export const getEarthPic = async () => {
   const key = process.env.NEXT_PUBLIC_NASA_API_KEY
   let url = `https://api.nasa.gov/EPIC/api/natural/images?api_key=${key}`
   const picUrl = await axios

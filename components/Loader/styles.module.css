@@ -1,0 +1,20 @@
+.loader {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.loader > span::after {
+  border-radius: 50%;
+  content: '';
+  display: flex;
+  background: var(--color-accent);
+  height: 6px;
+  width: 6px;
+  transition: 0.3s ease-out;
+}
+
+.loader > span[data-active='true']::after {
+  transform: scale(2);
+}

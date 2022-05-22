@@ -1,14 +1,28 @@
+import { useEffect, useState } from 'react'
+
+import { Interweave } from 'interweave'
+
 import styles from './styles.module.css'
 
-export default function DailyVerse() {
+export default function DailyVerse({ passageData }) {
+  const [passage, setPassage] = useState(null)
+  const [citation, setCitation] = useState(null)
+
+  useEffect(() => {
+    if (passageData) {
+      let html = passageData.passages[0]
+      html = html.replace('<b', '<sup').replace('</b>', '</sup>')
+      setPassage(html)
+      setCitation(passageData.canonical)
+    }
+  }, [passageData])
+
   return (
     <div className={styles['daily-verse']}>
       <blockquote>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-        suscipit tempus massa nec dapibus. Integer tincidunt interdum
-        condimentum.
+        <Interweave content={passage} />
       </blockquote>
-      <cite>lorem 1:11</cite>
+      <cite>{citation}</cite>
     </div>
   )
 }

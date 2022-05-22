@@ -6,6 +6,7 @@ export default function EarthPic({ earthPic }) {
   return (
     <div className={styles['earth-pic']}>
       <Image
+        alt='earth'
         height='2048'
         layout='responsive'
         priority

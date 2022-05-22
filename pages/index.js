@@ -10,8 +10,26 @@ import PageWrapper from 'components/PageWrapper'
 
 import styles from './styles.module.css'
 
-export default function Home({ earthPic, randomPassageData }) {
-  if (!randomPassageData || !earthPic)
+export default function Home() {
+  const [earthPic, setEarthPic] = useState(null)
+  const [randomPassageData, setRandomPassageData] = useState(null)
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    ;(async () => {
+      const pic = await getEarthPic()
+      const data = await getRandomPassageData()
+
+      setEarthPic(pic)
+      setRandomPassageData(data)
+
+      setLoading(false)
+    })()
+  }, [])
+
+  if (loading)
     return (
       <PageWrapper>
         <Loader />
@@ -26,15 +44,4 @@ export default function Home({ earthPic, randomPassageData }) {
       </div>
     </PageWrapper>
   )
-}
-
-export async function getStaticProps() {
-  const earthPic = await getEarthPic()
-  const randomPassageData = await getRandomPassageData()
-  return {
-    props: {
-      earthPic,
-      randomPassageData,
-    },
-  }
 }

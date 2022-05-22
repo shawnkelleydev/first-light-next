@@ -12,11 +12,7 @@ export default function DailyVerse({ passageData }) {
   useEffect(() => {
     if (passageData) {
       let html = passageData.passages[0]
-
-      html = html
-        .replaceAll('<b', '<sup')
-        .replaceAll('</b>', '</sup>')
-        .replaceAll('&nbsb;', '')
+      html = html.replaceAll('<b', '<sup').replaceAll('</b>', '</sup>')
 
       setPassage(html)
       setCitation(passageData.canonical)

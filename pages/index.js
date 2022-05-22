@@ -21,7 +21,10 @@ export default function Home({ earthPic }) {
 
   useEffect(() => {
     const verse = getRandomVerse()
-    if (!router.query.q) router.push(`/?q=${verse}`)
+
+    let path = router.asPath
+
+    if (!path.includes('/?q=')) router.push(`/?q=${verse}`)
   }, [router])
 
   useEffect(() => {

@@ -16,7 +16,7 @@ export default function DailyVerse({ passageData }) {
       html = html
         .replaceAll('<b', '<sup')
         .replaceAll('</b>', '</sup>')
-        .replaceAll('\n', '')
+        .replaceAll('&nbsb;', '')
 
       setPassage(html)
       setCitation(passageData.canonical)

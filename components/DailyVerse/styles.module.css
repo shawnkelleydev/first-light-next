@@ -8,6 +8,7 @@
 
 .daily-verse h2,
 .daily-verse h3,
+.daily-verse sup[class='footnote'],
 .daily-verse p:last-child {
   display: none;
 }

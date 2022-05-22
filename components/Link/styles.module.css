@@ -1,24 +1,21 @@
 .a {
-  --active-color: #var(--color-accent);
-  --active-background-color: none;
-  --background: none;
-  --hover-background-color: none;
-  --hover-color: var(--color-accent);
-  --padding: 0;
-  --text-color: #fff;
-  background: var(--background);
-  color: var(--text-color);
+  color: var(--color-accent);
   position: relative;
-  padding: var(--padding);
   transition: 0.2s ease-out;
 }
 
-.active {
-  background: var(--active-background-color);
-  color: var(--active-color);
+.a::before {
+  background: var(--color-accent);
+  content: '';
+  height: 1px;
+  position: absolute;
+  transition: 0.2s ease-out;
+  width: 0;
+  left: 50%;
+  bottom: -2px;
 }
 
-.a:hover {
-  color: var(--hover-color);
-  background: var(--hover-background-color);
+.a:hover::before {
+  left: 0;
+  width: 100%;
 }

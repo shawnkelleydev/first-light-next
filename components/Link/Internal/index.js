@@ -1,20 +1,23 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 export default function External({ styles, text, url }) {
-  let { route } = useRouter()
+  // let { route } = useRouter()
 
-  const checkForMatch = () => {
-    let match = false
-    const words = text.replace(/[?.!]/g, '').split(' ')
-    words.forEach((word) => (route.includes(word) ? (match = true) : null))
-    if (text === 'home' && route === '/') match = true
-    return match
-  }
+  // const checkForMatch = () => {
+  //   let match = false
+  //   const words = text.replace(/[?.!]/g, '').split(' ')
+  //   words.forEach((word) => (route.includes(word) ? (match = true) : null))
+  //   if (text === 'home' && route === '/') match = true
+  //   return match
+  // }
 
   return (
     <Link href={url}>
-      <a className={`${styles.a} ${checkForMatch() ? styles.active : ''}`}>
+      <a
+        className={styles.a}
+        // data-active={checkForMatch()}
+      >
         {text}
       </a>
     </Link>

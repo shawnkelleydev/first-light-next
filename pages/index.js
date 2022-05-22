@@ -13,7 +13,8 @@ import PageWrapper from 'components/PageWrapper'
 
 import styles from './styles.module.css'
 
-export default function Home({ earthPic }) {
+export default function Home() {
+  const [earthPic, setEarthPic] = useState(null)
   const [randomPassageData, setRandomPassageData] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -21,8 +22,7 @@ export default function Home({ earthPic }) {
 
   useEffect(() => {
     const verse = getRandomVerse()
-
-    let path = router.asPath
+    const path = router.asPath
 
     if (!path.includes('/?q=')) router.push(`/?q=${verse}`)
   }, [router])
@@ -34,7 +34,9 @@ export default function Home({ earthPic }) {
       if (!query) return
 
       const data = await getPassageData(query)
+      const pic = await getEarthPic()
 
+      setEarthPic(pic)
       setRandomPassageData(data)
       setLoading(false)
     })()
@@ -57,13 +59,4 @@ export default function Home({ earthPic }) {
       </div>
     </PageWrapper>
   )
-}
-
-export const getStaticProps = async () => {
-  const earthPic = await getEarthPic()
-  return {
-    props: {
-      earthPic,
-    },
-  }
 }

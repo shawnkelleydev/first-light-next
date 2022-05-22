@@ -39,8 +39,10 @@ export default function Home() {
   return (
     <PageWrapper>
       <div className={styles.home}>
-        <EarthPic earthPic={earthPic} />
-        <DailyVerse passageData={randomPassageData} />
+        <div>
+          <EarthPic earthPic={earthPic} />
+          <DailyVerse passageData={randomPassageData} />
+        </div>
       </div>
     </PageWrapper>
   )

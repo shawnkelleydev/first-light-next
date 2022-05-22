@@ -7,8 +7,8 @@ import styles from './styles.module.css'
 export default function PageWrapper({ children }) {
   return (
     <div className={styles['page-wrapper']}>
-      <Header />
       <PageContent>{children}</PageContent>
+      <Header />
       <Footer />
     </div>
   )

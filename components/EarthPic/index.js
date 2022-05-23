@@ -15,7 +15,7 @@ export default function EarthPic({ earthPicData }) {
       data-date={date}
     >
       <Image
-        alt='earth'
+        alt={`Earth from space, taken on ${date}`}
         height='2048'
         layout='responsive'
         priority

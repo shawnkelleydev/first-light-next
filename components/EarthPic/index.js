@@ -3,10 +3,17 @@ import Image from 'next/image'
 import styles from './styles.module.css'
 
 export default function EarthPic({ earthPicData }) {
-  const { imageUrl } = earthPicData
+  const { imageData, imageUrl } = earthPicData
+  const { caption, date } = imageData
+
+  console.log(earthPicData)
 
   return (
-    <div className={styles['earth-pic']}>
+    <div
+      className={styles['earth-pic']}
+      data-caption={caption}
+      data-date={date}
+    >
       <Image
         alt='earth'
         height='2048'

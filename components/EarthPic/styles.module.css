@@ -1,3 +1,20 @@
 .earth-pic {
   flex: 1 250px;
+  position: relative;
+}
+
+.earth-pic[data-caption][data-date]::after {
+  background: var(--color-secondary);
+  content: attr(data-caption) ' on ' attr(data-date);
+  opacity: 0;
+  padding: 8px;
+  margin: 24px;
+  position: absolute;
+  text-align: center;
+  transition: 0.2s ease-out;
+  top: 50%;
+}
+
+.earth-pic[data-caption]:hover::after {
+  opacity: 0.9;
 }

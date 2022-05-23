@@ -4,8 +4,11 @@ const key = process.env.NEXT_PUBLIC_NASA_API_KEY
 
 export const getApod = async () => {
   const url = `https://api.nasa.gov/planetary/apod?api_key=${key}`
-  const res = await axios.get(url)
-  return res.data
+  const data = await axios
+    .get(url)
+    .then((res) => res.data)
+    .catch((err) => console.error('apod error', err))
+  return data
 }
 
 export const getEarthPic = async () => {

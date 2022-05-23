@@ -1,0 +1,18 @@
+.bible-query {
+  background: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+
+.bible-query form {
+  display: flex;
+}
+
+.bible-query button {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 4px;
+}

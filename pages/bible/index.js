@@ -2,39 +2,49 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
-import { getApod } from 'services/nasa'
+import { getPassageData } from 'services/esv'
 
 import PageWrapper from 'components/PageWrapper'
 
 import styles from './styles.module.css'
+import Loader from 'components/Loader'
+import { Interweave } from 'interweave'
+import BibleReader from 'components/BibleReader'
+import BibleQuery from 'components/BibleQuery'
+// import Loader from 'components/Loader'
 
 export default function Bible() {
-  const [apod, setApod] = useState(null)
+  const [query, setQuery] = useState(null)
+  const [passageData, setPassageData] = useState(null)
+
+  const router = useRouter()
 
   useEffect(() => {
-    if (apod) return
-    ;(async () => {
-      const apodData = await getApod()
-      setApod(apodData)
-    })()
-  }, [apod])
+    const query = router.query.q
+    if (query) setQuery(query)
+  }, [router])
 
-  console.log('apod', apod)
+  useEffect(() => {
+    if (query) {
+      ;(async () => {
+        const data = await getPassageData(query)
+        setPassageData(data)
+      })()
+    }
+  }, [query])
 
-  if (!apod) return
+  if (query && !passageData)
+    return (
+      <PageWrapper>
+        <Loader />
+      </PageWrapper>
+    )
 
   return (
     <PageWrapper>
       <div className={styles.bible}>
-        <Image
-          height='2160'
-          layout='fill'
-          objectFit='cover'
-          objectPosition='left'
-          width='3840'
-          src='/jupiter.jpeg'
-        />
-        <h2>BIBLE</h2>
+        <BibleQuery />
+        {query && <BibleReader />}
       </div>
     </PageWrapper>
   )

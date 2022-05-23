@@ -7,7 +7,6 @@ import styles from './styles.module.css'
 
 export default function BibleReader({ passageData }) {
   const [passage, setPassage] = useState(null)
-  console.log('data', passageData)
 
   const { canonical, passage_meta, passages } = passageData
 

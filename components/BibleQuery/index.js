@@ -13,9 +13,11 @@ export default function BibleQuery({ passageData }) {
   const router = useRouter()
 
   useEffect(() => {
-    const { canonical } = passageData
-    if (canonical.length < 1)
-      setErrorMessage('Passage not found.  Please try again.')
+    if (passageData) {
+      const { canonical } = passageData
+      canonical.length < 1 &&
+        setErrorMessage('Passage not found.  Please try again.')
+    }
   }, [passageData])
 
   const handleSubmit = (event) => {

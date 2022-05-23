@@ -6,8 +6,6 @@ export default function EarthPic({ earthPicData }) {
   const { imageData, imageUrl } = earthPicData
   const { caption, date } = imageData
 
-  console.log(earthPicData)
-
   return (
     <div
       className={styles['earth-pic']}

@@ -1,0 +1,5 @@
+.space {
+  align-items: center;
+  display: grid;
+  flex: 1;
+}

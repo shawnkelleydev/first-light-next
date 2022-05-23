@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['api.nasa.gov'],
+    domains: ['api.nasa.gov', 'images-assets.nasa.gov'],
   },
 }
 

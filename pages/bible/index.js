@@ -41,8 +41,6 @@ export default function Bible() {
       </PageWrapper>
     )
 
-  console.log(passageData)
-
   return (
     <PageWrapper>
       <div className={styles.bible}>

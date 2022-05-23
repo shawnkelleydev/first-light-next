@@ -1,11 +1,14 @@
 import PageWrapper from 'components/PageWrapper'
+import SpacePic from 'components/SpacePic'
 
 import styles from './styles.module.css'
 
-export default function Work() {
+export default function Space() {
   return (
     <PageWrapper>
-      <h2>SPACE</h2>
+      <div className={styles.space}>
+        <SpacePic />
+      </div>
     </PageWrapper>
   )
 }

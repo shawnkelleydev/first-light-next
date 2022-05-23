@@ -11,3 +11,26 @@ export const meta = {
 }
 
 export const pages = ['bible', 'space']
+
+export const nasaQueries = [
+  'cassini',
+  'juno',
+  'messenger',
+  'new horizons',
+  'mercury',
+  'venus',
+  'earth',
+  'mars',
+  'jupiter',
+  'saturn',
+  'uranus',
+  'neptune',
+  'pluto',
+  'comet',
+  'asteroid',
+  'star',
+  'sun',
+  'galaxy',
+  'milky way',
+  'black hole',
+]

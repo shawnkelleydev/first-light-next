@@ -66,11 +66,23 @@ export const getNasaImageData = async (rawQueryData) => {
 }
 
 export const getNasaImageMetadata = async (urlArray) => {
-  const metaUrl = urlArray.find((url) => url.includes('metadata.json'))
+  const metaUrl = makeHttps(
+    urlArray.find((url) => url.includes('metadata.json'))
+  )
   const { data } = await axios
     .get(metaUrl)
     .catch((error) => console.error('error in getNasaImageMetadata', error))
   return data
+}
+
+export const filterItems = (items) => {
+  const filteredItems = items.filter(
+    (item) =>
+      item.data[0].media_type === 'image' &&
+      item.data[0].center?.toLowerCase().includes('jpl')
+  )
+
+  return filteredItems
 }
 
 export const getNasaImage = async (query) => {
@@ -82,9 +94,9 @@ export const getNasaImage = async (query) => {
 
   const items = await queryNasaByPage(query, page)
 
-  const qualifiedImages = items.filter(
-    (item) => item.data[0].media_type === 'image'
-  )
+  const qualifiedImages = filterItems(items)
+
+  if (qualifiedImages.length < 1) return
 
   const n = getRandomNumber(qualifiedImages.length)
   const selectedImageQueryData = qualifiedImages[n]
@@ -98,8 +110,8 @@ export const getNasaImage = async (query) => {
   const { title } = selectedImageQueryData.data[0]
 
   const size = {
-    width: metadata['Composite:ImageSize'].split('x')[0],
-    height: metadata['Composite:ImageSize'].split('x')[1],
+    width: metadata['Composite:ImageSize']?.split('x')[0],
+    height: metadata['Composite:ImageSize']?.split('x')[1],
   }
   const description = metadata['AVAIL:Description']
 

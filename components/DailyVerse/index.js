@@ -15,7 +15,8 @@ export default function DailyVerse({ passageData }) {
       html = html.replaceAll('<b', '<sup').replaceAll('</b>', '</sup>')
 
       setPassage(html)
-      setCitation(passageData.canonical)
+      const truncatedCitation = passageData.canonical.split(':')[0]
+      setCitation(truncatedCitation)
     }
   }, [passageData])
 
@@ -27,7 +28,12 @@ export default function DailyVerse({ passageData }) {
       <blockquote>
         <Interweave content={passage} />
       </blockquote>
-      <cite>{citation}</cite>
+      <div>
+        <Link url={`/bible?q=${citation}`}>
+          <span>read </span>
+          <cite>{citation}</cite>
+        </Link>
+      </div>
     </div>
   )
 }

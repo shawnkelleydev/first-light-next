@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { getEarthPic } from 'services/nasa'
+import { getEarthPicData } from 'services/nasa'
 import { getPassageData } from 'services/esv'
 
 import { getRandomVerse } from 'utils/esv'
@@ -14,7 +14,7 @@ import PageWrapper from 'components/PageWrapper'
 import styles from './styles.module.css'
 
 export default function Home() {
-  const [earthPic, setEarthPic] = useState(null)
+  const [earthPicData, setEarthPicData] = useState(null)
   const [randomPassageData, setRandomPassageData] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -33,11 +33,11 @@ export default function Home() {
       const query = router.query.q
       if (!query) return
 
-      const data = await getPassageData(query)
-      const pic = await getEarthPic()
+      const picData = await getEarthPicData()
+      const passageData = await getPassageData(query)
 
-      setEarthPic(pic)
-      setRandomPassageData(data)
+      setEarthPicData(picData)
+      setRandomPassageData(passageData)
       setLoading(false)
     })()
   }, [router])
@@ -53,7 +53,7 @@ export default function Home() {
     <PageWrapper>
       <div className={styles.home}>
         <div>
-          <EarthPic earthPic={earthPic} />
+          <EarthPic earthPicData={earthPicData} />
           <DailyVerse passageData={randomPassageData} />
         </div>
       </div>

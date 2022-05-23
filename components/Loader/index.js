@@ -6,7 +6,7 @@ export default function Loader() {
   const [flip, setFlip] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => setFlip(!flip), 300)
+    setTimeout(() => setFlip(!flip), 200)
   }, [flip])
 
   return (

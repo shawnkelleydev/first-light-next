@@ -11,7 +11,7 @@ export const getApod = async () => {
   return data
 }
 
-export const getEarthPic = async () => {
+export const getEarthPicData = async () => {
   let url = `https://api.nasa.gov/EPIC/api/natural/images?api_key=${key}`
   const picUrl = await axios
     .get(url)
@@ -24,7 +24,13 @@ export const getEarthPic = async () => {
       const dateArray = imageData.date.split(' ')[0].split('-')
       const { image } = imageData
 
-      return `https://api.nasa.gov/EPIC/archive/natural/${dateArray[0]}/${dateArray[1]}/${dateArray[2]}/png/${image}.png?api_key=${key}`
+      const imageUrl = `https://api.nasa.gov/EPIC/archive/natural/${dateArray[0]}/${dateArray[1]}/${dateArray[2]}/png/${image}.png?api_key=${key}`
+      const data = {
+        imageUrl,
+        imageData,
+      }
+
+      return data
     })
     .catch((err) => console.error(err))
   return picUrl

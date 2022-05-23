@@ -12,7 +12,7 @@
   background: var(--color-accent);
   height: 6px;
   width: 6px;
-  transition: 0.3s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .loader > span[data-active='true']::after {

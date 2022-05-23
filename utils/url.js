@@ -2,6 +2,10 @@ export const encodeString = (string) => {
   return string.replace(' ', '%20')
 }
 
+export const makeHttps = (url) => {
+  return url.replace('http', 'https')
+}
+
 export const getEsvUrl = (type, rawCitation) => {
   const urlCitation = encodeString(rawCitation)
 

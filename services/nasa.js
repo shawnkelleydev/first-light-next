@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getRandomNumber } from 'utils/math'
+import { makeHttps } from 'utils/url'
 
 const key = process.env.NEXT_PUBLIC_NASA_API_KEY
 
@@ -90,7 +91,7 @@ export const getNasaImage = async (query) => {
 
   const { data } = await getNasaImageData(selectedImageQueryData)
 
-  const imageUrl = data.find((url) => url.includes('orig'))
+  const imageUrl = makeHttps(data.find((url) => url.includes('orig')))
 
   const metadata = await getNasaImageMetadata(data)
 

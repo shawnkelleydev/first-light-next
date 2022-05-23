@@ -1,7 +1,8 @@
 .bible {
-  align-items: center;
+  background: var(--color-secondary);
   display: flex;
+  flex-direction: column;
   flex: 1;
-  justify-content: center;
-  position: relative;
+  max-width: 768px;
+  padding: 64px 24px;
 }

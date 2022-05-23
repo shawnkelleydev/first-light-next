@@ -1,3 +1,17 @@
-.bible-reader {
-  background: var(--color-secondary);
+.bible-reader h2,
+.bible-reader h3,
+.bible-reader h4 {
+  margin: 24px 0;
+}
+
+.bible-reader div[class*='footnotes'] > p {
+  font-size: 0.8rem;
+}
+
+.bible-reader a {
+  color: var(--color-accent);
+}
+
+.bible-reader a[class='fn'] {
+  margin-right: 4px;
 }

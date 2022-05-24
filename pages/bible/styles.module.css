@@ -6,3 +6,9 @@
   max-width: 768px;
   padding: 64px 24px;
 }
+
+.bible[data-passage='false'] {
+  align-items: center;
+  background: transparent;
+  justify-content: center;
+}

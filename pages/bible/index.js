@@ -5,7 +5,6 @@ import { getPassageData } from 'services/esv'
 
 import BibleReader from 'components/BibleReader'
 import Loader from 'components/Loader'
-import PageWrapper from 'components/PageWrapper'
 
 import styles from './styles.module.css'
 import BibleQuery from 'components/BibleQuery'
@@ -21,6 +20,10 @@ export default function Bible() {
   useEffect(() => {
     const query = router.query.q
     if (query) setQuery(query)
+    if (!query) {
+      setQuery(null)
+      setPassageData(null)
+    }
   }, [router])
 
   useEffect(() => {
@@ -31,13 +34,18 @@ export default function Bible() {
         setPassageData(data)
         setLoading(false)
       })()
+    } else {
+      setPassageData(null)
     }
   }, [query])
 
   if (query && loading) return <Loader />
 
   return (
-    <div className={styles.bible}>
+    <div
+      className={styles.bible}
+      data-passage={!!passageData}
+    >
       <BibleQuery passageData={passageData} />
       {passageData?.passages.length > 0 && (
         <BibleReader passageData={passageData} />

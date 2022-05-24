@@ -75,7 +75,7 @@ export const getNasaImageMetadata = async (urlArray) => {
   return data
 }
 
-export const filterItems = (items) => {
+export const getQualifiedImages = (items) => {
   const filteredItems = items.filter(
     (item) =>
       item.data[0].media_type === 'image' &&
@@ -85,38 +85,46 @@ export const filterItems = (items) => {
   return filteredItems
 }
 
+export const getRandomPageNumber = (hits) => {
+  const totalPages = Math.ceil(hits / 100)
+  const limitedPages = totalPages > 100 ? 100 : totalPages
+  return getRandomNumber(limitedPages) + 1
+}
+
+export const buildImageDataObject = (title, arrayOfImages) => {
+  const imageUrl = makeHttps(data.find((url) => url.includes('orig')))
+
+  const metadata = await getNasaImageMetadata(arrayOfImages)
+
+  const size = {
+    width: metadata['Composite:ImageSize']?.split('x')[0],
+    height: metadata['Composite:ImageSize']?.split('x')[1],
+  }
+
+  const description = metadata['AVAIL:Description']
+
+  return { title, imageUrl, size, description }
+}
+
 export const getNasaImage = async (query) => {
   let rawQueryData = await queryNasa(query)
   const { total_hits } = rawQueryData.data.collection.metadata
 
-  let pages = Math.ceil(total_hits / 100)
-  pages = pages > 100 ? 100 : pages
-  const page = getRandomNumber(pages) + 1
+  const page = getRandomPageNumber(total_hits)
 
   const items = await queryNasaByPage(query, page)
 
-  const qualifiedImages = filterItems(items)
+  const qualifiedImages = getQualifiedImages(items)
 
   if (qualifiedImages.length < 1) return
 
   const n = getRandomNumber(qualifiedImages.length)
   const selectedImageQueryData = qualifiedImages[n]
 
-  const { data } = await getNasaImageData(selectedImageQueryData)
-
-  const imageUrl = makeHttps(data.find((url) => url.includes('orig')))
-
-  const metadata = await getNasaImageMetadata(data)
-
   const { title } = selectedImageQueryData.data[0]
+  const arrayOfImages = await getNasaImageData(selectedImageQueryData).data
+  
+  const imageDataObject = buildImageDataObject(title, arrayOfImages)
 
-  const size = {
-    width: metadata['Composite:ImageSize']?.split('x')[0],
-    height: metadata['Composite:ImageSize']?.split('x')[1],
-  }
-  const description = metadata['AVAIL:Description']
-
-  const imageData = { title, imageUrl, size, description }
-
-  return imageData
+  return imageDataObject
 }

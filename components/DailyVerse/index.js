@@ -3,6 +3,8 @@ import { Interweave } from 'interweave'
 
 import Link from 'components/Link'
 
+import { processPassageHtml, truncateCitation } from 'utils/esv'
+
 import styles from './styles.module.css'
 
 export default function DailyVerse({ passageData }) {
@@ -11,12 +13,12 @@ export default function DailyVerse({ passageData }) {
 
   useEffect(() => {
     if (passageData) {
-      let html = passageData.passages[0]
-      html = html.replaceAll('<b', '<sup').replaceAll('</b>', '</sup>')
+      const rawPassageHtml = passageData.passages[0]
+      const processedPassageHtml = processPassageHtml(rawPassageHtml)
+      setPassage(processedPassageHtml)
 
-      setPassage(html)
-      const truncatedCitation = passageData.canonical.split(':')[0]
-      setCitation(truncatedCitation)
+      const citation = truncateCitation(passageData.canonical)
+      setCitation(citation)
     }
   }, [passageData])
 

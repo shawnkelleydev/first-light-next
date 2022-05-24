@@ -25,17 +25,19 @@ export default function SpacePic() {
   useEffect(() => {
     setError(false)
     setLoading(true)
-    ;(async () => {
-      if (query) {
+    query &&
+      (async () => {
         let data
         let index = 0
         while (!data) {
-          if (index > 9) {
-            setError(true)
-            break
+          switch (index) {
+            case index > 9:
+              setError(true)
+              break
+            default:
+              data = await getNasaImage(query)
+              index++
           }
-          data = await getNasaImage(query)
-          index++
         }
 
         if (data) {
@@ -44,8 +46,7 @@ export default function SpacePic() {
         }
 
         setLoading(false)
-      }
-    })()
+      })()
   }, [query])
 
   if (loading) return <Loader />

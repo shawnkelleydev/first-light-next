@@ -14,7 +14,8 @@ export default function BibleReader({ passageData }) {
       const supHtml = rawHtml
         .replaceAll('<b', '<sup')
         .replaceAll('</b>', '</sup>')
-      setPassage(supHtml)
+      const htmlSansNbsp = supHtml.replaceAll('&nbsp;', '')
+      setPassage(htmlSansNbsp)
     }
   }, [passages])
 

@@ -8,6 +8,11 @@
   font-size: 0.8rem;
 }
 
+.bible-reader p {
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
 .bible-reader a {
   color: var(--color-accent);
 }

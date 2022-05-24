@@ -89,7 +89,8 @@ export const getNasaImage = async (query) => {
   let rawQueryData = await queryNasa(query)
   const { total_hits } = rawQueryData.data.collection.metadata
 
-  const pages = Math.ceil(total_hits / 100)
+  let pages = Math.ceil(total_hits / 100)
+  pages = pages > 100 ? 100 : pages
   const page = getRandomNumber(pages) + 1
 
   const items = await queryNasaByPage(query, page)

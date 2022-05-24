@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Interweave } from 'interweave'
 
-import BibleQuery from 'components/BibleQuery'
-
 import styles from './styles.module.css'
 
 export default function BibleReader({ passageData }) {
   const [passage, setPassage] = useState(null)
 
-  const { canonical, passage_meta, passages } = passageData
+  const { passages } = passageData
 
   useEffect(() => {
     const rawHtml = passages[0]

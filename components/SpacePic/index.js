@@ -26,16 +26,25 @@ export default function SpacePic() {
     setError(false)
     setLoading(true)
     ;(async () => {
-      const data = await getNasaImage(query)
-      if (!data) {
-        setImageData(null)
-        setError(true)
+      if (query) {
+        let data
+        let index = 0
+        while (!data) {
+          if (index > 9) {
+            setError(true)
+            break
+          }
+          data = await getNasaImage(query)
+          index++
+        }
+
+        if (data) {
+          setImageData(data)
+          setError(false)
+        }
+
+        setLoading(false)
       }
-      if (data) {
-        setImageData(data)
-        setError(false)
-      }
-      setLoading(false)
     })()
   }, [query])
 

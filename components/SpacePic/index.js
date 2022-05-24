@@ -52,29 +52,27 @@ export default function SpacePic() {
 
   if (loading) return <Loader />
 
+  if (error)
+    return (
+      <div>
+        <h3>Error</h3>
+        <p>please try again</p>
+      </div>
+    )
+
   return (
     <div className={styles['space-pic']}>
-      {imageData && (
-        <>
-          <Image
-            alt={imageData.title}
-            blurDataURL={imageData.placeholderUrl}
-            layout='intrinsic'
-            height={imageData.size.height}
-            placeholder='blur'
-            priority
-            src={imageData.imageUrl}
-            width={imageData.size.width}
-          />
-          <SpacePicModal imageData={imageData} />
-        </>
-      )}
-      {error && (
-        <div>
-          <h3>Error</h3>
-          <p>please try again</p>
-        </div>
-      )}
+      <Image
+        alt={imageData.title}
+        blurDataURL={imageData.placeholderUrl}
+        layout='intrinsic'
+        height={imageData.size.height}
+        placeholder='blur'
+        priority
+        src={imageData.imageUrl}
+        width={imageData.size.width}
+      />
+      <SpacePicModal imageData={imageData} />
     </div>
   )
 }

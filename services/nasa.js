@@ -93,6 +93,9 @@ export const getRandomPageNumber = (hits) => {
 
 export const buildImageDataObject = async (title, arrayOfImages) => {
   const imageUrl = makeHttps(arrayOfImages.find((url) => url.includes('orig')))
+  const placeholderUrl = makeHttps(
+    arrayOfImages.find((url) => url.includes('thumb'))
+  )
 
   const metadata = await getNasaImageMetadata(arrayOfImages)
 
@@ -103,7 +106,7 @@ export const buildImageDataObject = async (title, arrayOfImages) => {
 
   const description = metadata['AVAIL:Description']
 
-  return { title, imageUrl, size, description }
+  return { title, imageUrl, placeholderUrl, size, description }
 }
 
 export const getNasaImage = async (query) => {

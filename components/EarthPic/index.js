@@ -14,8 +14,10 @@ export default function EarthPic({ earthPicData }) {
     >
       <Image
         alt={`Earth from space, taken on ${date}`}
+        blurDataURL='/earth.jpg'
         height='2048'
         layout='responsive'
+        placeholder='blur'
         priority
         src={imageUrl}
         width='2048'

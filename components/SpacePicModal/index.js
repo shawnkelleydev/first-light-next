@@ -2,7 +2,6 @@ import Link from 'components/Link'
 import styles from './styles.module.css'
 
 export default function SpacePicModal({ imageData }) {
-  console.log(imageData)
   const { title, description } = imageData
 
   return (

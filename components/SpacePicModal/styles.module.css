@@ -1,0 +1,34 @@
+.space-pic-modal {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  padding: 64px 24px;
+  position: absolute;
+  transition: 0.2s ease-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.space-pic-modal figcaption {
+  background: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 500px;
+  padding: 24px;
+}
+
+.space-pic-modal p {
+  line-height: 1.3;
+}
+
+.space-pic-modal div {
+  text-align: center;
+}
+
+.space-pic-modal:hover {
+  opacity: 1;
+}

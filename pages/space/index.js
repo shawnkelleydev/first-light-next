@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import PageWrapper from 'components/PageWrapper'
@@ -10,8 +10,6 @@ import { nasaQueries } from 'constants/data'
 import styles from './styles.module.css'
 
 export default function Space() {
-  const [query, setQuery] = useState(null)
-
   const router = useRouter()
 
   useEffect(() => {

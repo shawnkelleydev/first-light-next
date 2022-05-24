@@ -6,6 +6,7 @@ import { getNasaImage } from 'services/nasa'
 
 import styles from './styles.module.css'
 import Loader from 'components/Loader'
+import SpacePicModal from 'components/SpacePicModal'
 
 export default function SpacePic() {
   const [query, setQuery] = useState(null)
@@ -54,14 +55,17 @@ export default function SpacePic() {
   return (
     <div className={styles['space-pic']}>
       {imageData && (
-        <Image
-          alt={imageData.title}
-          layout='intrinsic'
-          height={imageData.size.height}
-          priority
-          src={imageData.imageUrl}
-          width={imageData.size.width}
-        />
+        <>
+          <Image
+            alt={imageData.title}
+            layout='intrinsic'
+            height={imageData.size.height}
+            priority
+            src={imageData.imageUrl}
+            width={imageData.size.width}
+          />
+          <SpacePicModal imageData={imageData} />
+        </>
       )}
       {error && (
         <div>

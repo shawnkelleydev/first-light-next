@@ -12,8 +12,7 @@ import Loader from 'components/Loader'
 
 import styles from './styles.module.css'
 
-export default function Home() {
-  const [earthPicData, setEarthPicData] = useState(null)
+export default function Home({ earthPicData }) {
   const [randomPassageData, setRandomPassageData] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -32,10 +31,8 @@ export default function Home() {
       const query = router.query.q
       if (!query) return
 
-      const picData = await getEarthPicData()
       const passageData = await getPassageData(query)
 
-      setEarthPicData(picData)
       setRandomPassageData(passageData)
       setLoading(false)
     })()
@@ -51,4 +48,14 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const earthPicData = await getEarthPicData()
+  return {
+    props: {
+      earthPicData,
+    },
+    revalidate: 3600,
+  }
 }

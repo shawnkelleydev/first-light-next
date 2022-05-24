@@ -34,21 +34,14 @@ export default function Bible() {
     }
   }, [query])
 
-  if (query && loading)
-    return (
-      <PageWrapper>
-        <Loader />
-      </PageWrapper>
-    )
+  if (query && loading) return <Loader />
 
   return (
-    <PageWrapper>
-      <div className={styles.bible}>
-        <BibleQuery passageData={passageData} />
-        {passageData?.passages.length > 0 && (
-          <BibleReader passageData={passageData} />
-        )}
-      </div>
-    </PageWrapper>
+    <div className={styles.bible}>
+      <BibleQuery passageData={passageData} />
+      {passageData?.passages.length > 0 && (
+        <BibleReader passageData={passageData} />
+      )}
+    </div>
   )
 }

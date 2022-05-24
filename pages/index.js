@@ -9,7 +9,6 @@ import { getRandomVerse } from 'utils/esv'
 import DailyVerse from 'components/DailyVerse'
 import EarthPic from 'components/EarthPic'
 import Loader from 'components/Loader'
-import PageWrapper from 'components/PageWrapper'
 
 import styles from './styles.module.css'
 
@@ -42,21 +41,14 @@ export default function Home() {
     })()
   }, [router])
 
-  if (loading)
-    return (
-      <PageWrapper>
-        <Loader />
-      </PageWrapper>
-    )
+  if (loading) return <Loader />
 
   return (
-    <PageWrapper>
-      <div className={styles.home}>
-        <div>
-          <EarthPic earthPicData={earthPicData} />
-          <DailyVerse passageData={randomPassageData} />
-        </div>
+    <div className={styles.home}>
+      <div>
+        <EarthPic earthPicData={earthPicData} />
+        <DailyVerse passageData={randomPassageData} />
       </div>
-    </PageWrapper>
+    </div>
   )
 }

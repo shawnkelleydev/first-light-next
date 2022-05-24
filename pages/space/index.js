@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import PageWrapper from 'components/PageWrapper'
 import SpacePic from 'components/SpacePic'
 
 import { getRandomNumber } from 'utils/math'
@@ -21,10 +20,8 @@ export default function Space() {
   }, [router])
 
   return (
-    <PageWrapper>
-      <div className={styles.space}>
-        <SpacePic />
-      </div>
-    </PageWrapper>
+    <div className={styles.space}>
+      <SpacePic />
+    </div>
   )
 }

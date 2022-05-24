@@ -1,5 +1,12 @@
-.ul {
+.copyright {
+  display: flex;
+  flex-direction: column;
   margin: auto;
   padding: 0;
   text-align: center;
+}
+
+.copyright small {
+  font-size: 0.8rem;
+  line-height: 1.2;
 }

@@ -1,8 +1,8 @@
 import { verses } from 'constants/verses'
-import { getRandomNumber } from 'utils/math'
+import { getRandomIndexNumber } from 'utils/math'
 
 export const getRandomVerse = () => {
-  const n = getRandomNumber(verses.length)
+  const n = getRandomIndexNumber(verses.length)
   const verse = verses[n]
   return verse
 }

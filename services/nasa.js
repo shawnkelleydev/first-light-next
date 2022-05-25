@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getRandomNumber } from 'utils/math'
+import { getRandomIndexNumber } from 'utils/math'
 import { makeHttps } from 'utils/url'
 
 const key = process.env.NEXT_PUBLIC_NASA_API_KEY
@@ -88,7 +88,7 @@ export const getQualifiedImages = (items) => {
 export const getRandomPageNumber = (hits) => {
   const totalPages = Math.ceil(hits / 100)
   const limitedPages = totalPages > 100 ? 100 : totalPages
-  return getRandomNumber(limitedPages) + 1
+  return getRandomIndexNumber(limitedPages) + 1
 }
 
 export const buildImageDataObject = async (title, arrayOfImages) => {
@@ -121,7 +121,7 @@ export const getNasaImage = async (query) => {
 
   if (qualifiedImages.length < 1) return
 
-  const n = getRandomNumber(qualifiedImages.length)
+  const n = getRandomIndexNumber(qualifiedImages.length)
   const selectedImageQueryData = qualifiedImages[n]
 
   const { title } = selectedImageQueryData.data[0]

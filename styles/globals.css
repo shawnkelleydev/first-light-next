@@ -28,3 +28,7 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+sup {
+  margin-right: 4px;
+}

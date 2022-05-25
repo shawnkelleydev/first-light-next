@@ -1,1 +1,1 @@
-export const getRandomNumber = (limit) => Math.floor(Math.random() * limit)
+export const getRandomIndexNumber = (limit) => Math.floor(Math.random() * limit)

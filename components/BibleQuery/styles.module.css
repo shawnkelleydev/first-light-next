@@ -1,5 +1,6 @@
 .bible-query {
   display: flex;
+  margin: auto;
 }
 
 .bible-query fieldset {

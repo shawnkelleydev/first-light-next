@@ -65,14 +65,12 @@ export default function SpacePic() {
       <Image
         alt={imageData.title}
         blurDataURL={imageData.placeholderUrl}
-        layout='intrinsic'
-        height={imageData.size.height}
+        layout='fill'
+        objectFit='contain'
         placeholder='blur'
         priority
         src={imageData.imageUrl}
-        width={imageData.size.width}
       />
-      <SpacePicModal imageData={imageData} />
     </div>
   )
 }

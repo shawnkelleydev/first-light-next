@@ -2,5 +2,11 @@
   display: flex;
   flex: 1;
   justify-content: center;
+  max-height: 100vh;
   position: relative;
+}
+
+.space-pic > span {
+  width: 100vh;
+  width: auto;
 }

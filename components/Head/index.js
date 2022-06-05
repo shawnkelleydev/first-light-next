@@ -14,6 +14,10 @@ export default function Head() {
         name='keywords'
         content={meta.KEYWORDS}
       />
+      <meta
+        name='theme-color'
+        content='#1a153b'
+      />
       {/* TODO: Add custom favicon to public */}
       <link
         rel='icon'

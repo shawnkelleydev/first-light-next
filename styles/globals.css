@@ -6,9 +6,9 @@
 }
 
 :root {
-  --color-primary: rgb(26, 21, 59);
-  --color-secondary: rgb(33, 33, 33);
-  --color-accent: rgb(0, 242, 255);
+  --color-primary: #1a153b;
+  --color-secondary: #212121;
+  --color-accent: #00f2ff;
 }
 
 h1 {

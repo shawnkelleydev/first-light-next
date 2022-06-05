@@ -4,6 +4,7 @@ import { Interweave } from 'interweave'
 import BibleNav from 'components/BibleNav'
 
 import styles from './styles.module.css'
+import { processPassageHtml } from 'utils/esv'
 
 export default function BibleReader({ passageData }) {
   const [passage, setPassage] = useState(null)
@@ -13,10 +14,8 @@ export default function BibleReader({ passageData }) {
   useEffect(() => {
     const rawHtml = passages[0]
     if (rawHtml) {
-      const supHtml = rawHtml
-        .replaceAll('<b', '<sup')
-        .replaceAll('</b>', '</sup>')
-      const htmlSansNbsp = supHtml.replaceAll('&nbsp;', '')
+      const processedHtml = processPassageHtml(rawHtml)
+      const htmlSansNbsp = processedHtml.replaceAll('&nbsp;', '')
       setPassage(htmlSansNbsp)
     }
   }, [passages])

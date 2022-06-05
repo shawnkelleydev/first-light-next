@@ -13,6 +13,16 @@
   margin-bottom: 24px;
 }
 
+.bible-reader p[class*='block-indent'] {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+}
+
+.bible-reader p[class*='block-indent'] > span[class*='indent'] {
+  margin-left: 48px;
+}
+
 .bible-reader a {
   color: var(--color-accent);
 }

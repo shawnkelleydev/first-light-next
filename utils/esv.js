@@ -8,10 +8,7 @@ export const getRandomVerse = () => {
 }
 
 export const processPassageHtml = (html) => {
-  return html
-    .replaceAll('<b', '<sup')
-    .replaceAll('</b>', '</sup>')
-    .replaceAll('&nbsp;', '')
+  return html.replaceAll('<b', '<sup').replaceAll('</b>', '</sup>')
 }
 
 export const truncateCitation = (citation) => {

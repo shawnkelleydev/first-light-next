@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { meta } from 'constants/data'
+import { meta } from 'utils/constants/data'
 
 import styles from './styles.module.css'
 

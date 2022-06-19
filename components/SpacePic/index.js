@@ -67,6 +67,7 @@ export default function SpacePic() {
         blurDataURL={imageData.placeholderUrl}
         layout='fill'
         objectFit='contain'
+        objectPosition='center'
         placeholder='blur'
         priority
         src={imageData.imageUrl}

@@ -5,25 +5,3 @@
   max-height: 100vh;
   position: relative;
 }
-
-.error {
-  align-items: center;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 24px;
-  justify-content: center;
-}
-
-.error button {
-  background: #fff;
-  border: none;
-  padding: 12px 24px;
-  transition: 0.2s ease;
-}
-
-.error button:hover {
-  background: #000;
-  box-shadow: 0 0 0 1px inset #fff;
-  color: #fff;
-}

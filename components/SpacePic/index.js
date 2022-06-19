@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 import useSpacePicData from './useSpacePicData'
 
+import Error from 'components/Error'
 import Loader from 'components/Loader'
 
 import styles from './styles.module.css'
@@ -14,15 +14,10 @@ export default function SpacePic() {
 
   if (error)
     return (
-      <div className={styles.error}>
-        <h2>Oops...</h2>
-        <p>Something went wrong.</p>
-        <Link href='/space'>
-          <a>
-            <button>try again</button>
-          </a>
-        </Link>
-      </div>
+      <Error
+        redirect='/space'
+        actionText='try again'
+      />
     )
 
   return (

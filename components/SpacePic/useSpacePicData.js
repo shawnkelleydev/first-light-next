@@ -23,18 +23,13 @@ export default function useSpacePicData() {
     setLoading(true)
 
     const getImage = async () => {
-      const getData = async (index) => {
-        if (index > 10) return
-
-        const data = await getNasaImage(query, index)
-        index++
-
-        if (data) return data
-        return await getData(index)
-      }
-
       let index = 0
-      const data = await getData(index)
+      let data
+
+      while (!data && index < 10) {
+        data = await getNasaImage(query)
+        index++
+      }
 
       data && setImageData(data)
       data && setError(false)

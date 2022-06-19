@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import useSpacePicData from './useSpacePicData'
 
@@ -13,9 +14,14 @@ export default function SpacePic() {
 
   if (error)
     return (
-      <div>
-        <h3>Error</h3>
-        <p>please try again</p>
+      <div className={styles.error}>
+        <h2>Oops...</h2>
+        <p>Something went wrong.</p>
+        <Link href='/space'>
+          <a>
+            <button>try again</button>
+          </a>
+        </Link>
       </div>
     )
 

@@ -1,54 +1,13 @@
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
-import { getNasaImage } from 'services/nasa'
+import useSpacePicData from './useSpacePicData'
+
+import Loader from 'components/Loader'
 
 import styles from './styles.module.css'
-import Loader from 'components/Loader'
-import SpacePicModal from 'components/SpacePicModal'
 
 export default function SpacePic() {
-  const [query, setQuery] = useState(null)
-
-  const [imageData, setImageData] = useState(null)
-
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(true)
-
-  const router = useRouter()
-
-  useEffect(() => {
-    const { q } = router.query
-    if (q) setQuery(q)
-  }, [router])
-
-  useEffect(() => {
-    setError(false)
-    setLoading(true)
-    query &&
-      (async () => {
-        let data
-        let index = 0
-        while (!data) {
-          switch (index) {
-            case index > 9:
-              setError(true)
-              break
-            default:
-              data = await getNasaImage(query)
-              index++
-          }
-        }
-
-        if (data) {
-          setImageData(data)
-          setError(false)
-        }
-
-        setLoading(false)
-      })()
-  }, [query])
+  const [imageData, error, loading] = useSpacePicData()
 
   if (loading) return <Loader />
 

@@ -9,7 +9,6 @@ export default function useSpacePicData() {
   const [imageData, setImageData] = useState(null)
 
   const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(true)
 
   const router = useRouter()
 
@@ -20,7 +19,7 @@ export default function useSpacePicData() {
 
   useEffect(() => {
     setError(false)
-    setLoading(true)
+    setImageData(null)
 
     const getImage = async () => {
       let index = 0
@@ -35,12 +34,10 @@ export default function useSpacePicData() {
       data && setError(false)
 
       !data && setError(true)
-
-      setLoading(false)
     }
 
     query && getImage()
   }, [query])
 
-  return [imageData, error, loading]
+  return [imageData, error]
 }

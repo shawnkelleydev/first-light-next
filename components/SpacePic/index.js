@@ -8,9 +8,7 @@ import Loader from 'components/Loader'
 import styles from './styles.module.css'
 
 export default function SpacePic() {
-  const [imageData, error, loading] = useSpacePicData()
-
-  if (loading) return <Loader />
+  const [imageData, error] = useSpacePicData()
 
   if (error)
     return (
@@ -20,17 +18,21 @@ export default function SpacePic() {
       />
     )
 
+  if (!imageData) return <Loader />
+
+  const { imageUrl, placeholderUrl, title } = imageData
+
   return (
     <div className={styles['space-pic']}>
       <Image
-        alt={imageData.title}
-        blurDataURL={imageData.placeholderUrl}
+        alt={title}
+        blurDataURL={placeholderUrl}
         layout='fill'
         objectFit='contain'
         objectPosition='center'
         placeholder='blur'
         priority
-        src={imageData.imageUrl}
+        src={imageUrl}
       />
     </div>
   )

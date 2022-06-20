@@ -18,11 +18,9 @@ export const fetchEarthPicData = async () => {
   return await axios
     .get(url)
     .then(res => {
-      const imageList = res.data
-      const imageData = imageList[getRandomIndex(imageList.length)]
+      const imageData = res.data[getRandomIndex(res.data.length)]
 
       const { date, image } = imageData
-
       const dateArray = date.split(' ')[0].split('-')
 
       const imageUrl = `https://api.nasa.gov/EPIC/archive/natural/${dateArray[0]}/${dateArray[1]}/${dateArray[2]}/png/${image}.png?api_key=${key}`
@@ -33,7 +31,7 @@ export const fetchEarthPicData = async () => {
 
 export const fetchImageMetadata = async urlArray => {
   const metadataUrl = convertToHttps(
-    urlArray.find(url => url.includes('metadata.json'))
+    urlArray.find(url => url.includes('metadata'))
   )
 
   return await axios
@@ -47,7 +45,7 @@ export const fetchImagesByPage = async (query, pageNumber) => {
   return await axios
     .get(url)
     .then(res => res.data.collection.items)
-    .catch(error => console.error('Error in fetchImagesByPage: ', error))
+    .catch(error => console.error('error in fetchImagesByPage: ', error))
 }
 
 export const fetchImageOptions = async rawQueryData => {

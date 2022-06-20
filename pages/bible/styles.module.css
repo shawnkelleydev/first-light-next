@@ -8,7 +8,7 @@
   padding: 64px 24px;
 }
 
-.bible[data-passage='false'] {
+.bible[data-show-passage='false'] {
   align-items: center;
   background: transparent;
   justify-content: center;

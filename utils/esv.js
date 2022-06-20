@@ -11,3 +11,5 @@ export const processPassageHtml = html =>
   html.replaceAll('<b', '<sup').replaceAll('</b>', '</sup>')
 
 export const truncateCitation = citation => citation.split(':')[0]
+
+export const verifyContent = content => !!content?.length

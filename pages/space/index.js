@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import SpacePic from 'components/SpacePic'
 
 import { getRandomIndex } from 'utils/math'
-import { nasaQueries } from 'utils/constants/data'
+import { queries } from 'utils/constants/queries'
 
 import styles from './styles.module.css'
 
@@ -14,7 +14,7 @@ export default function Space() {
   useEffect(() => {
     const routeHasQuery = router.asPath.includes('?q=')
 
-    const randomQuery = nasaQueries[getRandomIndex(nasaQueries.length)]
+    const randomQuery = queries[getRandomIndex(queries.length)]
 
     if (!routeHasQuery) router.push(`/space?q=${randomQuery}`)
   }, [router])

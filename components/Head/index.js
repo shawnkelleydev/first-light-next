@@ -1,6 +1,6 @@
 import HeadData from 'next/head'
 
-import { meta } from 'utils/constants/data'
+import { meta } from 'utils/constants/metadata'
 
 export default function Head() {
   return (

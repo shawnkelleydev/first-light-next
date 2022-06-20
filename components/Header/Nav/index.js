@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { pages } from 'utils/constants/data'
+import { pages } from 'utils/constants/metadata'
 
 import styles from './styles.module.css'
 

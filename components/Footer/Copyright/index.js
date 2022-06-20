@@ -1,6 +1,6 @@
 import Link from 'components/Link'
 
-import { meta } from 'utils/constants/data'
+import { meta } from 'utils/constants/metadata'
 
 import styles from './styles.module.css'
 

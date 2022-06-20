@@ -1,25 +1,25 @@
 import axios from 'axios'
-import { getRandomIndexNumber } from 'utils/math'
-import { makeHttps } from 'utils/url'
+
+import { getRandomIndex } from 'utils/math'
+import { convertToHttps } from 'utils/url'
 
 const key = process.env.NEXT_PUBLIC_NASA_API_KEY
 
-export const getApod = async () => {
+export const fetchApod = async () => {
   const url = `https://api.nasa.gov/planetary/apod?api_key=${key}`
-  const data = await axios
+  return await axios
     .get(url)
-    .then((res) => res.data)
-    .catch((err) => console.error('apod error', err))
-  return data
+    .then(res => res.data)
+    .catch(err => console.error('apod error', err))
 }
 
-export const getEarthPicData = async () => {
+export const fetchEarthPicData = async () => {
   let url = `https://api.nasa.gov/EPIC/api/natural/images?api_key=${key}`
-  const picUrl = await axios
+  return await axios
     .get(url)
-    .then((res) => {
+    .then(res => {
       const imageList = res.data
-      const n = Math.floor(Math.random() * imageList.length)
+      const n = getRandomIndex(imageList.length)
 
       const imageData = imageList[n]
 
@@ -27,108 +27,47 @@ export const getEarthPicData = async () => {
       const { image } = imageData
 
       const imageUrl = `https://api.nasa.gov/EPIC/archive/natural/${dateArray[0]}/${dateArray[1]}/${dateArray[2]}/png/${image}.png?api_key=${key}`
-      const data = {
+      const dataObject = {
         imageUrl,
         imageData,
       }
 
-      return data
+      return dataObject
     })
-    .catch((err) => console.error(err))
-  return picUrl
+    .catch(err => console.error(err))
 }
 
-export const queryNasa = async (query) => {
-  const url = `https://images-api.nasa.gov/search?q=${query}`
-  const response = await axios.get(url).catch((error) => console.error(error))
-  return response
+export const fetchImageMetadata = async urlArray => {
+  const metadataUrl = convertToHttps(
+    urlArray.find(url => url.includes('metadata.json'))
+  )
+
+  const { data } = await axios
+    .get(metadataUrl)
+    .catch(error => console.error('error in fetchImageMetadata', error))
+  return data
 }
 
-export const queryNasaByPage = async (query, page) => {
-  const url = `https://images-api.nasa.gov/search?q=${query}&page=${page}`
+export const fetchImagesByPage = async (query, pageNumber) => {
+  const url = `https://images-api.nasa.gov/search?q=${query}&page=${pageNumber}`
   const response = await axios
     .get(url)
-    .catch((error) => console.error('Error in queryNasaByPage: ', error))
+    .catch(error => console.error('Error in fetchImagesByPage: ', error))
 
   const { items } = response.data.collection
 
   return items
 }
 
-export const getNasaImageData = async (rawQueryData) => {
+export const fetchNasaImageData = async rawQueryData => {
   const { href } = rawQueryData
 
-  const metadata = await axios
+  return await axios
     .get(href)
-    .catch((error) => console.error('error in getNasaImageData', error))
-
-  return metadata
+    .catch(error => console.error('error in fetchNasaImageData', error))
 }
 
-export const getNasaImageMetadata = async (urlArray) => {
-  const metaUrl = makeHttps(
-    urlArray.find((url) => url.includes('metadata.json'))
-  )
-  const { data } = await axios
-    .get(metaUrl)
-    .catch((error) => console.error('error in getNasaImageMetadata', error))
-  return data
-}
-
-export const getQualifiedImages = (items) => {
-  const filteredItems = items.filter(
-    (item) =>
-      item.data[0].media_type === 'image' &&
-      item.data[0].center?.toLowerCase().includes('jpl')
-  )
-
-  return filteredItems
-}
-
-export const getRandomPageNumber = (hits) => {
-  const totalPages = Math.ceil(hits / 100)
-  const limitedPages = totalPages > 100 ? 100 : totalPages
-  return getRandomIndexNumber(limitedPages) + 1
-}
-
-export const buildImageDataObject = async (title, arrayOfImages) => {
-  const imageUrl = makeHttps(arrayOfImages.find((url) => url.includes('orig')))
-  const placeholderUrl = makeHttps(
-    arrayOfImages.find((url) => url.includes('thumb'))
-  )
-
-  const metadata = await getNasaImageMetadata(arrayOfImages)
-
-  const size = {
-    width: metadata['Composite:ImageSize']?.split('x')[0],
-    height: metadata['Composite:ImageSize']?.split('x')[1],
-  }
-
-  const description = metadata['AVAIL:Description']
-
-  return { title, imageUrl, placeholderUrl, size, description }
-}
-
-export const getNasaImage = async (query) => {
-  let rawQueryData = await queryNasa(query)
-  const { total_hits } = rawQueryData.data.collection.metadata
-
-  const page = getRandomPageNumber(total_hits)
-
-  const items = await queryNasaByPage(query, page)
-
-  const qualifiedImages = getQualifiedImages(items)
-
-  if (qualifiedImages.length < 1) return
-
-  const n = getRandomIndexNumber(qualifiedImages.length)
-  const selectedImageQueryData = qualifiedImages[n]
-
-  const { title } = selectedImageQueryData.data[0]
-  const imageData = await getNasaImageData(selectedImageQueryData)
-  const arrayOfImages = imageData.data
-
-  const imageDataObject = buildImageDataObject(title, arrayOfImages)
-
-  return imageDataObject
+export const queryNasa = async query => {
+  const url = `https://images-api.nasa.gov/search?q=${query}`
+  return await axios.get(url).catch(error => console.error(error))
 }

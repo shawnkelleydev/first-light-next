@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { getEarthPicData } from 'services/nasa'
+import { fetchEarthPicData } from 'services/nasa'
 import { getPassageData } from 'services/esv'
 
 import { getRandomVerse } from 'utils/esv'
@@ -51,7 +51,7 @@ export default function Home({ earthPicData }) {
 }
 
 export async function getStaticProps() {
-  const earthPicData = await getEarthPicData()
+  const earthPicData = await fetchEarthPicData()
   return {
     props: {
       earthPicData,

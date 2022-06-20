@@ -3,7 +3,7 @@ import axios from 'axios'
 import { getRandomVerse } from 'utils/esv'
 import { getEsvUrl } from 'utils/url'
 
-export const getPassageData = async (rawCitation) => {
+export const getPassageData = async rawCitation => {
   const key = process.env.NEXT_PUBLIC_ESV_API_KEY
 
   const url = getEsvUrl('html', rawCitation)
@@ -13,8 +13,8 @@ export const getPassageData = async (rawCitation) => {
 
   const passage = await axios
     .get(url, { headers })
-    .then((res) => res.data)
-    .catch((err) => console.error(err))
+    .then(res => res.data)
+    .catch(err => console.error(err))
 
   return passage
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { getNasaImage } from 'services/nasa'
+import { getNasaImageData } from 'utils/nasa'
 
 export default function useSpacePicData() {
   const [query, setQuery] = useState(null)
@@ -21,22 +21,15 @@ export default function useSpacePicData() {
     setError(false)
     setImageData(null)
 
-    const getImage = async () => {
-      let index = 0
-      let data
+    const handleImageData = (imageData) => {
+      imageData && setImageData(imageData)
+      imageData && setError(false)
 
-      while (!data && index < 10) {
-        data = await getNasaImage(query)
-        index++
-      }
-
-      data && setImageData(data)
-      data && setError(false)
-
-      !data && setError(true)
+      !imageData && setError(true)
     }
 
-    query && getImage()
+    query &&
+      getNasaImageData(query).then((imageData) => handleImageData(imageData))
   }, [query])
 
   return [imageData, error]

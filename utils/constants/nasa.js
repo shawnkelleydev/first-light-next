@@ -1,4 +1,4 @@
-export const ACTION_TYPES = {
+export const SPACE_PIC_ACTION_TYPES = {
   reset: 'RESET_IMAGE_DATA',
   setQuery: 'SET_QUERY',
   setImageObject: 'SET_IMAGE_OBJECT',

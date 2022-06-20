@@ -1,7 +1,7 @@
 import { getRandomIndex, getRandomNumber } from 'utils/math'
 import {
   fetchImageMetadata,
-  fetchNasaImageData,
+  fetchImageOptions,
   queryNasa,
   fetchImagesByPage,
 } from 'services/nasa'
@@ -49,10 +49,9 @@ export const getImageDataObject = async query => {
   const selectedImageQueryData = filteredImages[randomIndex]
 
   const { title } = selectedImageQueryData.data[0]
-  const imageData = await fetchNasaImageData(selectedImageQueryData)
-  const imageOptions = imageData.data
+  const { data } = await fetchImageOptions(selectedImageQueryData)
 
-  const imageDataObject = buildImageDataObject(title, imageOptions)
+  const imageDataObject = buildImageDataObject(title, data)
 
   return imageDataObject
 }

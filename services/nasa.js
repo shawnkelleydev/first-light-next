@@ -19,20 +19,14 @@ export const fetchEarthPicData = async () => {
     .get(url)
     .then(res => {
       const imageList = res.data
-      const n = getRandomIndex(imageList.length)
+      const imageData = imageList[getRandomIndex(imageList.length)]
 
-      const imageData = imageList[n]
+      const { date, image } = imageData
 
-      const dateArray = imageData.date.split(' ')[0].split('-')
-      const { image } = imageData
+      const dateArray = date.split(' ')[0].split('-')
 
       const imageUrl = `https://api.nasa.gov/EPIC/archive/natural/${dateArray[0]}/${dateArray[1]}/${dateArray[2]}/png/${image}.png?api_key=${key}`
-      const dataObject = {
-        imageUrl,
-        imageData,
-      }
-
-      return dataObject
+      return { imageUrl, imageData }
     })
     .catch(err => console.error(err))
 }
@@ -42,29 +36,26 @@ export const fetchImageMetadata = async urlArray => {
     urlArray.find(url => url.includes('metadata.json'))
   )
 
-  const { data } = await axios
+  return await axios
     .get(metadataUrl)
+    .then(res => res.data)
     .catch(error => console.error('error in fetchImageMetadata', error))
-  return data
 }
 
 export const fetchImagesByPage = async (query, pageNumber) => {
   const url = `https://images-api.nasa.gov/search?q=${query}&page=${pageNumber}`
-  const response = await axios
+  return await axios
     .get(url)
+    .then(res => res.data.collection.items)
     .catch(error => console.error('Error in fetchImagesByPage: ', error))
-
-  const { items } = response.data.collection
-
-  return items
 }
 
-export const fetchNasaImageData = async rawQueryData => {
+export const fetchImageOptions = async rawQueryData => {
   const { href } = rawQueryData
 
   return await axios
     .get(href)
-    .catch(error => console.error('error in fetchNasaImageData', error))
+    .catch(error => console.error('error in fetchImageOptions', error))
 }
 
 export const queryNasa = async query => {

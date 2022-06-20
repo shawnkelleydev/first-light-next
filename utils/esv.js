@@ -1,16 +1,13 @@
 import { verses } from 'utils/constants/verses'
 import { getRandomIndex } from 'utils/math'
+import { encodeString } from './url'
 
-export const getRandomVerse = () => {
-  const n = getRandomIndex(verses.length)
-  const verse = verses[n]
-  return verse
-}
+export const getEsvUrl = (type, rawCitation) =>
+  `https://api.esv.org/v3/passage/${type}/?q=${encodeString(rawCitation)}`
 
-export const processPassageHtml = html => {
-  return html.replaceAll('<b', '<sup').replaceAll('</b>', '</sup>')
-}
+export const getRandomVerse = () => verses[getRandomIndex(verses.length)]
 
-export const truncateCitation = citation => {
-  return citation.split(':')[0]
-}
+export const processPassageHtml = html =>
+  html.replaceAll('<b', '<sup').replaceAll('</b>', '</sup>')
+
+export const truncateCitation = citation => citation.split(':')[0]

@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-import { getRandomVerse } from 'utils/esv'
-import { getEsvUrl } from 'utils/url'
+import { getEsvUrl, getRandomVerse } from 'utils/esv'
 
 export const getPassageData = async rawCitation => {
   const key = process.env.NEXT_PUBLIC_ESV_API_KEY

@@ -27,6 +27,8 @@ export const buildImageDataObject = async (title, imageOptions) => {
   return { title, imageUrl, placeholderUrl, size, description }
 }
 
+export const isQuery = path => path.includes('?q=')
+
 export const filterNasaImages = items => {
   return items.filter(
     item =>

@@ -2,7 +2,7 @@ import { getRandomIndex, getRandomNumber } from 'utils/math'
 import {
   fetchImageMetadata,
   fetchImageOptions,
-  queryNasa,
+  queryNasaMediaDatabase,
   fetchImagesByPage,
 } from 'services/nasa'
 import { convertToHttps } from 'utils/url'
@@ -36,7 +36,7 @@ export const filterNasaImages = items => {
 }
 
 export const getImageDataObject = async query => {
-  const rawQueryData = await queryNasa(query)
+  const rawQueryData = await queryNasaMediaDatabase(query)
   const { total_hits } = rawQueryData.data.collection.metadata
   const pageNumber = getRandomPageNumber(total_hits)
 

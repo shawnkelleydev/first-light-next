@@ -58,7 +58,7 @@ export const fetchImageOptions = async rawQueryData => {
     .catch(error => console.error('error in fetchImageOptions', error))
 }
 
-export const queryNasa = async query => {
+export const queryNasaMediaDatabase = async query => {
   const url = `https://images-api.nasa.gov/search?q=${query}`
   return await axios.get(url).catch(error => console.error(error))
 }

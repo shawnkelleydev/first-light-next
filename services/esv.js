@@ -16,6 +16,5 @@ export const getPassageData = async rawCitation => {
     .catch(err => console.error(err))
 }
 
-export const getRandomPassageData = async () => {
-  return await getPassageData(getRandomVerse())
-}
+export const getRandomPassageData = async () =>
+  await getPassageData(getRandomVerse())

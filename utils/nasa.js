@@ -9,6 +9,12 @@ import {
   fetchImagesByPage,
 } from 'services/nasa'
 
+/* ==========================================================================
+
+  INTERNAL UTILITIES
+
+========================================================================== */
+
 const buildImageDataObject = async (title, imageOptions) => {
   const imageUrl = convertToHttps(
     imageOptions.find(url => url.includes('orig'))
@@ -44,6 +50,12 @@ const getRandomPageNumber = hits => {
 
   return getRandomNumber(pagesLimitedByMax)
 }
+
+/* ==========================================================================
+
+  EXPORTS
+
+========================================================================== */
 
 export const hasQuery = path => path.includes('?')
 

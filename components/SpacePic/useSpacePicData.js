@@ -21,7 +21,7 @@ export default function useSpacePicData() {
     setError(false)
     setImageData(null)
 
-    const handleImageData = (imageData) => {
+    const handleImageData = imageData => {
       imageData && setImageData(imageData)
       imageData && setError(false)
 
@@ -29,7 +29,7 @@ export default function useSpacePicData() {
     }
 
     query &&
-      getNasaImageData(query).then((imageData) => handleImageData(imageData))
+      getNasaImageData(query).then(imageData => handleImageData(imageData))
   }, [query])
 
   return [imageData, error]

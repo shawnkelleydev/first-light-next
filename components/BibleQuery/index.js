@@ -20,7 +20,7 @@ export default function BibleQuery({ passageData }) {
     }
   }, [passageData])
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault()
     if (query.length < 1) setErrorMessage('Please provide input.')
     if (query.length > 1) {
@@ -32,13 +32,13 @@ export default function BibleQuery({ passageData }) {
   return (
     <form
       className={styles['bible-query']}
-      onSubmit={(event) => handleSubmit(event)}
+      onSubmit={event => handleSubmit(event)}
     >
       <fieldset data-error-message={errorMessage}>
         <legend>Go to a passage</legend>
         <div>
           <input
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={event => setQuery(event.target.value)}
             type='text'
             value={query}
           />

@@ -1,33 +1,13 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { BIBLE_QUERY_ACTION_TYPES } from 'utils/constants/esv'
 
-import { useEffect } from 'react'
+import useBibleQueryData from './useBibleQueryData'
 
 import styles from './styles.module.css'
 
 export default function BibleQuery({ passageData }) {
-  const [query, setQuery] = useState('')
-
-  const [errorMessage, setErrorMessage] = useState('')
-
-  const router = useRouter()
-
-  useEffect(() => {
-    if (passageData) {
-      const { canonical } = passageData
-      canonical.length < 1 &&
-        setErrorMessage('Passage not found.  Please try again.')
-    }
-  }, [passageData])
-
-  const handleSubmit = event => {
-    event.preventDefault()
-    if (query.length < 1) setErrorMessage('Please provide input.')
-    if (query.length > 1) {
-      setErrorMessage('')
-      router.push(`/bible?q=${query.toLowerCase()}`)
-    }
-  }
+  const [dispatch, handleSubmit, query, errorMessage] = useBibleQueryData({
+    passageData,
+  })
 
   return (
     <form
@@ -38,7 +18,12 @@ export default function BibleQuery({ passageData }) {
         <legend>Go to a passage</legend>
         <div>
           <input
-            onChange={event => setQuery(event.target.value)}
+            onChange={event =>
+              dispatch({
+                type: BIBLE_QUERY_ACTION_TYPES.setQuery,
+                query: event.target.value,
+              })
+            }
             type='text'
             value={query}
           />

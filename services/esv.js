@@ -11,15 +11,12 @@ export const getPassageData = async rawCitation => {
     Authorization: `Token ${key}`,
   }
 
-  const passage = await axios
+  return await axios
     .get(url, { headers })
     .then(res => res.data)
     .catch(err => console.error(err))
-
-  return passage
 }
 
 export const getRandomPassageData = async () => {
-  const passage = await getPassageData(getRandomVerse())
-  return passage
+  return await getPassageData(getRandomVerse())
 }

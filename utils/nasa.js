@@ -54,10 +54,9 @@ const getImageDataObject = async query => {
 }
 
 const getImageSize = metadata => {
-  const width = metadata['Composite:ImageSize']?.split('x')[0]
-  const height = metadata['Composite:ImageSize']?.split('x')[1]
+  const dimensions = metadata['Composite:ImageSize']?.split('x')
 
-  return { width, height }
+  return { width: dimensions[0], height: dimensions[1] }
 }
 
 const getRandomPageNumber = hits => {
@@ -66,7 +65,7 @@ const getRandomPageNumber = hits => {
   return getRandomNumber(pagesLimitedByMax)
 }
 
-export const hasQuery = path => path.includes('?q=')
+export const hasQuery = path => path.includes('?')
 
 // abstraction for components
 export const getNasaImage = async query => {

@@ -1,13 +1,15 @@
-import { getRandomIndex, getRandomNumber } from 'utils/math'
+import { queries } from './constants/nasa'
+import { getRandomIndex, getRandomNumber, selectRandomItem } from 'utils/math'
+import { convertToHttps } from 'utils/url'
+
 import {
   fetchImageMetadata,
   fetchImageOptions,
   queryNasaMediaDatabase,
   fetchImagesByPage,
 } from 'services/nasa'
-import { convertToHttps } from 'utils/url'
 
-export const buildImageDataObject = async (title, imageOptions) => {
+const buildImageDataObject = async (title, imageOptions) => {
   const imageUrl = convertToHttps(
     imageOptions.find(url => url.includes('orig'))
   )
@@ -17,19 +19,14 @@ export const buildImageDataObject = async (title, imageOptions) => {
 
   const metadata = await fetchImageMetadata(imageOptions)
 
-  const size = {
-    width: metadata['Composite:ImageSize']?.split('x')[0],
-    height: metadata['Composite:ImageSize']?.split('x')[1],
-  }
+  const size = getImageSize(metadata)
 
   const description = metadata['AVAIL:Description']
 
   return { title, imageUrl, placeholderUrl, size, description }
 }
 
-export const isQuery = path => path.includes('?q=')
-
-export const filterNasaImages = items => {
+const filterNasaImages = items => {
   return items.filter(
     item =>
       item.data[0].media_type === 'image' &&
@@ -37,29 +34,42 @@ export const filterNasaImages = items => {
   )
 }
 
-export const getImageDataObject = async query => {
-  const rawQueryData = await queryNasaMediaDatabase(query)
-  const { total_hits } = rawQueryData.data.collection.metadata
-  const pageNumber = getRandomPageNumber(total_hits)
+const getImageDataObject = async query => {
+  const { total_hits } = await queryNasaMediaDatabase(query).then(
+    data => data.data.collection.metadata
+  )
 
-  const images = await fetchImagesByPage(query, pageNumber)
+  const images = await fetchImagesByPage(query, getRandomPageNumber(total_hits))
 
   const filteredImages = filterNasaImages(images)
+
   if (!filteredImages.length) return null
 
-  const randomIndex = getRandomIndex(filteredImages.length)
-  const selectedImageQueryData = filteredImages[randomIndex]
+  const selectedImage = selectRandomItem(filteredImages)
 
-  const { title } = selectedImageQueryData.data[0]
-  const { data } = await fetchImageOptions(selectedImageQueryData)
+  const { title } = selectedImage.data[0]
+  const { data } = await fetchImageOptions(selectedImage)
 
-  const imageDataObject = buildImageDataObject(title, data)
-
-  return imageDataObject
+  return buildImageDataObject(title, data)
 }
 
-// use this in components
-export const getNasaImageData = async query => {
+const getImageSize = metadata => {
+  const width = metadata['Composite:ImageSize']?.split('x')[0]
+  const height = metadata['Composite:ImageSize']?.split('x')[1]
+
+  return { width, height }
+}
+
+const getRandomPageNumber = hits => {
+  const totalPages = Math.ceil(hits / 100)
+  const pagesLimitedByMax = totalPages > 100 ? 100 : totalPages
+  return getRandomNumber(pagesLimitedByMax)
+}
+
+export const hasQuery = path => path.includes('?q=')
+
+// abstraction for components
+export const getNasaImage = async query => {
   let data
   let index = 0
   while (index < 10 && !data) {
@@ -70,8 +80,4 @@ export const getNasaImageData = async query => {
   return data
 }
 
-export const getRandomPageNumber = hits => {
-  const totalPages = Math.ceil(hits / 100)
-  const pagesLimitedByMax = totalPages > 100 ? 100 : totalPages
-  return getRandomNumber(pagesLimitedByMax)
-}
+export const getQuery = () => queries[getRandomIndex(queries.length)]

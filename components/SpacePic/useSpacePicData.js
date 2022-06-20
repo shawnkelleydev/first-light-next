@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { getNasaImageData } from 'utils/nasa'
+import { getNasaImage } from 'utils/nasa'
 
 export default function useSpacePicData() {
   const [query, setQuery] = useState(null)
@@ -28,8 +28,7 @@ export default function useSpacePicData() {
       !imageData && setError(true)
     }
 
-    query &&
-      getNasaImageData(query).then(imageData => handleImageData(imageData))
+    query && getNasaImage(query).then(imageData => handleImageData(imageData))
   }, [query])
 
   return [imageData, error]

@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { queries } from 'utils/constants/nasa'
-import { getRandomIndex } from 'utils/math'
-import { isQuery } from 'utils/nasa'
+import { getQuery, hasQuery } from 'utils/nasa'
 
 import SpacePic from 'components/SpacePic'
 
@@ -13,9 +11,7 @@ export default function Space() {
   const router = useRouter()
 
   useEffect(() => {
-    const query = queries[getRandomIndex(queries.length)]
-
-    !isQuery(router.asPath) && router.push(`/space?q=${query}`)
+    !hasQuery(router.asPath) && router.push(`/space?q=${getQuery()}`)
   }, [router])
 
   return (

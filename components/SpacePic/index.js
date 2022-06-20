@@ -2,25 +2,16 @@ import Image from 'next/image'
 
 import useSpacePicData from './useSpacePicData'
 
-import Error from 'components/Error'
 import Loader from 'components/Loader'
 
 import styles from './styles.module.css'
 
 export default function SpacePic() {
-  const [imageData, error] = useSpacePicData()
+  const [imageObject] = useSpacePicData()
 
-  if (error)
-    return (
-      <Error
-        redirect='/space'
-        actionText='try again'
-      />
-    )
+  if (!imageObject) return <Loader />
 
-  if (!imageData) return <Loader />
-
-  const { imageUrl, placeholderUrl, title } = imageData
+  const { imageUrl, placeholderUrl, title } = imageObject
 
   return (
     <div className={styles['space-pic']}>

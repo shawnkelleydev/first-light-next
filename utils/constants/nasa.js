@@ -1,3 +1,10 @@
+export const ACTION_TYPES = {
+  reset: 'RESET_IMAGE_DATA',
+  setQuery: 'SET_QUERY',
+  setImageObject: 'SET_IMAGE_OBJECT',
+  setError: 'SET_ERROR',
+}
+
 export const queries = [
   'cassini',
   'juno',

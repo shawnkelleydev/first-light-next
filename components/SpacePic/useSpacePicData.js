@@ -1,36 +1,46 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import { useRouter } from 'next/router'
 
+import { ACTION_TYPES } from 'utils/constants/nasa'
 import { getNasaImageObject } from 'utils/nasa'
 
 export default function useSpacePicData() {
-  const [query, setQuery] = useState(null)
-
-  const [imageData, setImageData] = useState(null)
-
-  const [error, setError] = useState(false)
-
   const router = useRouter()
+
+  const intitialState = {
+    query: null,
+    imageObject: null,
+  }
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case ACTION_TYPES.reset:
+        return { ...state, imageObject: null }
+      case ACTION_TYPES.setQuery:
+        return { ...state, query: action.query }
+      case ACTION_TYPES.setImageObject:
+        return { ...state, imageObject: action.imageObject }
+      default:
+        throw new Error()
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, intitialState)
+  const { query, imageObject } = state
 
   useEffect(() => {
     const { q } = router.query
-    q && setQuery(q)
+    q && dispatch({ type: ACTION_TYPES.setQuery, query: q })
   }, [router])
 
   useEffect(() => {
-    setError(false)
-    setImageData(null)
-
-    const handleImageData = imageData => {
-      imageData && setImageData(imageData)
-      imageData && setError(false)
-
-      !imageData && setError(true)
-    }
+    dispatch({ type: ACTION_TYPES.reset })
 
     query &&
-      getNasaImageObject(query).then(imageData => handleImageData(imageData))
+      getNasaImageObject(query).then(imageObject =>
+        dispatch({ type: ACTION_TYPES.setImageObject, imageObject })
+      )
   }, [query])
 
-  return [imageData, error]
+  return [imageObject]
 }

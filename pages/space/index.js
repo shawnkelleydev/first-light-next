@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import SpacePic from 'components/SpacePic'
 
 import { getRandomIndex } from 'utils/math'
-import { queries } from 'utils/constants/queries'
+import { queries } from 'utils/constants/nasa'
 
 import styles from './styles.module.css'
 
